@@ -1,0 +1,10 @@
+<odoo>
+  <!--data-->
+
+    <!-- roles for each of the groups -->
+    <record id="my_library_manager" model="res.groups">
+      <field name="name">Library/Liable</field>
+    </record>
+    
+  <!--/data-->
+</odoo>

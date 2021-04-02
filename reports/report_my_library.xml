@@ -1,0 +1,44 @@
+<odoo>
+  <data>
+
+<!-- Here will go a report of the library generated in pdf -->
+
+  <!-- Report definition -->
+  <report
+    id="my_library.report_book"
+    model="my_library.book_library"
+    string="Book report in .pdf"
+    name="my_library.report_book_view"
+    file="my_library.report_book_view"
+    report_type="qweb-pdf"/>
+
+    <!-- Report content-->
+    <template id="report_book_view">
+      <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="book">
+          <t t-call="web.internal_layout">
+            <div class="page">
+              <h2 t-field="book.name"/> <!-- Title -->
+
+                <div>
+                  <strong>Price:</strong>
+                  <span t-field="book.price"/>
+                </div>
+
+                <div>
+                  <strong>Copies:</strong>
+                  <span t-field="book.copies"/>
+                </div>
+
+                <div>
+                  <strong>Category:</strong>
+                  <span t-field="book.category"/>
+                </div>
+
+              </div>
+            </t>
+          </t>
+        </t>
+      </template>
+  </data>
+</odoo>

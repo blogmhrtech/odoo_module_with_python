@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+category_liable,category_liable,model_my_library_catagory,my_library_manager,1,1,1,1
+book_liable,book_liable,model_my_library_book_library,my_library_manager,1,1,1,1

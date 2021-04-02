@@ -1,0 +1,193 @@
+<odoo>
+  <!--data-->
+
+    <!-- OBJECT ONE:
+          my_library.catagory
+
+        VIEWS:
+          tree view for: my_library.catagory_tree
+          form view for: my_library.catagory_form"
+    -->
+
+    <record model="ir.ui.view" id="my_library.catagory_tree">
+      <field name="name">my_library.catagory.tree</field>
+      <field name="model">my_library.catagory</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="description"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="my_library.catagory_form">
+      <field name="name">my_library.catagory.form</field>
+      <field name="model">my_library.catagory</field>
+      <field name="arch" type="xml">
+        <form>
+          <group colspan="2" col="2">
+            <field name="name"/>
+            <field name="description"/>
+            <field name="books">
+              <tree>
+                <field name="name"/>
+                <field name="price"/>
+                <field name="copies"/>
+              </tree>
+            </field>
+          </group>
+        </form>
+      </field>
+    </record>
+
+
+    <!-- OBJECT TWO:
+          my_library.book_library
+
+        VIEWS:
+          tree view for: my_library.book_library_tree
+          form view for: my_library.book_library_form"
+    -->
+
+
+    <record model="ir.ui.view" id="my_library.book_library_tree">
+      <field name="name">my_library.book_library.tree</field>
+      <field name="model">my_library.book_library</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="price"/>
+          <field name="copies"/>
+        </tree>
+      </field>
+    </record>
+
+
+
+    <record model="ir.ui.view" id="my_library.book_library_form">
+      <field name="name">my_library.book_library.form</field>
+      <field name="model">my_library.book_library</field>
+      <field name="arch" type="xml">
+        <form>
+          <group colspan="2" col="2">
+            <field name="name"/>
+            <field name="price"/>
+            <field name="copies"/>
+            <field name="date"/>
+            <field name="secondhand"/>
+            <field name="state"/>
+            <field name="category"/>
+            <field name="total"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- Search views | Books -->
+
+    <record model="ir.ui.view" id="my_library.book_library_search_view">
+      <field name="name">my_library.book_library.search</field>
+      <field name="model">my_library.book_library</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name" string="Title"/>
+          <field name="category" string="Category"/>
+
+          <!-- Search Filters -->
+          <filter name="Cheap books (less than 5€)" domain="[('price' , '&lt;' ,5)]"/>
+          <filter name="Expensive books (more than 50€)" domain="[('price' , '&gt;' ,50)]"/>
+
+        </search>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="my_library.catagory_action_window">
+      <field name="name">my_library.catagory.action_window"</field>
+      <field name="res_model">my_library.catagory</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="my_library.book_library_action_window">
+      <field name="name">my_library.book_library.action_window"</field>
+      <field name="res_model">my_library.book_library</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Top menu item -->
+                                                        <!-- Show menus for some groups -->
+    <menuitem name="Bookstore" id="my_library.menu_root" groups="my_library_manager"/>
+
+    <!-- menu categories -->
+    <menuitem name="Categories" id="my_library.categories_menu" parent="my_library.menu_root" groups="my_library_manager" action="my_library.catagory_action_window"/>
+    <menuitem name="Books" id="my_library.books_menu" parent="my_library.menu_root" groups="my_library_manager" action="my_library.book_library_action_window"/>
+
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="my_library.menu_1_list" parent="my_library.menu_1"
+              action="my_library.action_window"/>
+    <menuitem name="Server to list" id="my_library" parent="my_library.menu_2"
+              action="my_library.action_server"/>
+    -->
+
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="my_library.list">
+      <field name="name">my_library list</field>
+      <field name="model">my_library.my_library</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="my_library.action_window">
+      <field name="name">my_library window</field>
+      <field name="res_model">my_library.my_library</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="my_library.action_server">
+      <field name="name">my_library server</field>
+      <field name="model_id" ref="model_my_library_my_library"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="my_library" id="my_library.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="my_library.menu_1" parent="my_library.menu_root"/>
+    <menuitem name="Menu 2" id="my_library.menu_2" parent="my_library.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="my_library.menu_1_list" parent="my_library.menu_1"
+              action="my_library.action_window"/>
+    <menuitem name="Server to list" id="my_library" parent="my_library.menu_2"
+              action="my_library.action_server"/>
+    -->
+  <!--/data-->
+</odoo>

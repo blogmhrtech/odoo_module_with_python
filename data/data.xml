@@ -1,0 +1,7 @@
+<odoo>
+  <data>
+    <record id="categ" model="my_library.catagory"> <!-- Data preloaded in our module when we install it -->
+      <field name="name">Scientific</field>
+    </record>
+  </data>
+</odoo>
